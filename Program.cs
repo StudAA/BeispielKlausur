@@ -13,37 +13,46 @@ namespace BeispielKlausur
             string wiederholen;
             do
             {
+                int auswahl = 0;
                 Console.WriteLine("Menü Auswahl:");
                 Console.WriteLine("1: Summe von Brüchen");
                 Console.WriteLine("2: Zahlen Ausgeben");
-                Console.WriteLine("3: ");
-                Console.WriteLine("4: ");
-                int auswahl = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("3: Nullstellen der quadratischen Funktion");
+                Console.WriteLine("4: Palindrom überprüfen");
+                string auswahl0 = Console.ReadLine();
+                if (auswahl0 != "1" && auswahl0 != "2" && auswahl0 != "3" && auswahl0 != "4")
+                {
+                    Console.WriteLine("Auswahl ist ungültig.");
+                }
+                else
+                {
+                    auswahl = Convert.ToInt32(auswahl0);
+                }
 
                 switch (auswahl)
                 {
                     case 1:
                         Console.WriteLine("Es soll die Summe der Brüche von 1/a bis 1/b berechnet werden.");
                         Console.WriteLine("Geben Sie einen Wert für a ein:");
-                        int a = Convert.ToInt32(Console.ReadLine());
+                        double a = Convert.ToDouble(Console.ReadLine());
                         Console.WriteLine("Geben Sie einen Wert für b ein:");
-                        int b = Convert.ToInt32(Console.ReadLine());
-                        float summe = 0;
+                        double b = Convert.ToDouble(Console.ReadLine());
+                        double summe = 0;
                         if (a < b)
                         {
-                            for (float i = a; i <= b; i++)
+                            for (double i = a; i <= b; i++)
                             {
                                 summe += 1 / i;
                             }
                         }
                         else
                         {
-                            for (float i = b; i <= a; i++)
+                            for (double i = b; i <= a; i++)
                             {
                                 summe += 1 / i;
                             }
                         }
-                        Console.WriteLine("Die Summe der Brüche zwischen 1/" + a + "und 1/" + b + "ist:" + summe);
+                        Console.WriteLine("Die Summe der Brüche zwischen 1/" + a + " und 1/" + b + " ist:" + summe);
                         break;
 
                     case 2:
@@ -69,21 +78,71 @@ namespace BeispielKlausur
                         break;
 
                     case 3:
-                        Console.WriteLine("sollen die Nullstellen einer quadratischen Funktion in allgemeiner Form berechnet werden.");
+                        Console.WriteLine("Es sollen die Nullstellen einer quadratischen Funktion in allgemeiner Form berechnet werden.");
+                        Console.WriteLine("ax^2 + bx + c");
+                        Console.WriteLine("Geben Sie einen Wert für a an:");
+                        double aa = Convert.ToDouble(Console.ReadLine());
+                        Console.WriteLine("Geben Sie einen Wert für b an:");
+                        double bb = Convert.ToDouble(Console.ReadLine());
+                        Console.WriteLine("Geben Sie einen Wert für c an:");
+                        double cc = Convert.ToDouble(Console.ReadLine());
+                        double m = bb * bb - 4 * aa * cc;
+                        if (m < 0)
+                        {
+                            Console.WriteLine("Es existieren keine reellen Nullstellen für die Gleichung: " + aa + "x^2 + " + bb + "x + " + cc);
+                        }
+                        else if (m == 0)
+                        {
+                            Console.WriteLine("Es existiert genau eine reelle Nullstelle für die Gleichung: " + aa + "x^2 + " + bb + "x + " + cc);
+                            double x1 = (-bb + Math.Sqrt(m)) / 2 * aa;
+                            Console.WriteLine("x = " + x1);
+                        }
+                        else if (m > 0)
+                        {
+                            Console.WriteLine("Es existieren zwei reelle Nullstellen für die Gleichung: " + aa + "x^2 + " + bb + "x + " + cc);
+                            double x1 = (-bb + Math.Sqrt(m)) / 2 * aa;
+                            double x2 = (-bb - Math.Sqrt(m)) / 2 * aa;
+                            Console.WriteLine("x1 = " + x1 + " und x2 = " + x2);
+                        }
                         break;
 
                     case 4:
-
-                        break;
-
-                    default:
-                        Console.WriteLine("Auswahl ungültig!");
+                        Console.WriteLine("Ein Wort soll darauf überprüft werden ob es ein Palindrom ist, d.h. ob es vorwärts wie rückwärts gelesen identisch ist.");
+                        Console.WriteLine("Geben Sie ein Wort an:");
+                        string wort = Console.ReadLine();
+                        wort = wort.ToLower();
+                        string rückwärts = "";
+                        for (int i = wort.Length - 1; i >= 0; i--)
+                        {
+                            rückwärts += wort[i];
+                        }
+                        if (rückwärts == wort)
+                        {
+                            Console.WriteLine("Das Wort " + wort + " ist ein Palindrom.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Das Wort " + wort + " ist kein Palindrom.");
+                        }
                         break;
                 }
 
 
-
+                Console.WriteLine("Neue Auswahl? (j/n)");
                 wiederholen = Console.ReadLine();
+                for (int i = 0; i < 1; i = 0)
+                {
+                    if (wiederholen != "j" && wiederholen != "J" && wiederholen != "n" && wiederholen != "N")
+                    {
+                        Console.WriteLine("Auswahl ist ungültig.");
+                        Console.WriteLine("Neue Auswahl? (j/n)");
+                        wiederholen = Console.ReadLine();
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
             } while (wiederholen == "J"  || wiederholen == "j");
         }
     }
